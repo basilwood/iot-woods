@@ -26,7 +26,6 @@ var alertMessage = 'Delete item?';
 const speechProcessor = require('./speech-processor');
 
 class MainPage extends Component {
-//Test
 
   state = {
     vars: [], 
@@ -91,7 +90,7 @@ class MainPage extends Component {
         this.clearDisplay('textBox');
       } else {
         this.state.input = userInput;
-        const str = `${this.state.id}.` + `  ${userInput}`;
+        const str = `${this.state.id}.` + ` ${userInput}`;
         //const str = userInput;
         this.setState(this.state);
 
@@ -175,20 +174,35 @@ class MainPage extends Component {
         this.handleSpeechInput();
         this.saveDataToDisk();
       } else if ((userInput.indexOf('next', userInput.length - userInput.length)) === -1) {
+        if (this.state.input === ''){
+        const newInput = `${userInput}next`;
+        this.handleTextInput(newInput);
+        } else {
         const newInput = `${userInput}next`;
         const stateInput = `${this.state.input} ${newInput}`;
         this.handleTextInput(stateInput);
         this.inputStateToNull();
         this.handleSpeechInput();
         this.saveDataToDisk();
+        }
       } else {
-        const newInput = `${this.state.input} ${userInput}`;
+        //if this.state.input is !=='', add a space after it. 
+        //if not try other
+        console.log('state '+ this.state.input);
+        if (this.state.input === '') {
+        const Input = userInput;
+        console.log(Input);
         this.inputStateToNull();
-        //console.log(`the user imput is${  newInput}`);
-        this.handleTextInput(newInput);
+        this.handleTextInput(Input);
+      } else {
+        const Input = `${this.state.input} ${userInput}`;
+        console.log(Input);
+        this.inputStateToNull();
+        this.handleTextInput(Input);
         this.inputStateToNull();
         this.saveDataToDisk();
         this.handleSpeechInput();
+      }
       }
     }
 
