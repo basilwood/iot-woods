@@ -1,0 +1,70 @@
+import React, { Component } from 'react';
+import { AppRegistry, ScrollView,TextInput, Text, View } from 'react-native';
+
+import Style from './styling';
+import CheckBox from 'react-native-icon-checkbox';
+
+
+
+
+
+
+class VoiceCheckList extends Component {
+   
+state = {userInput: '',
+      isChecked: false,
+    };
+  
+  handlePressCheckedBox = (checked) => {
+    this.setState({
+      isChecked: checked,
+    });
+  }
+
+  renderList(){
+    var list = this.state.userInput;
+    var listArray=[];
+    listArray = list.split(' ');
+   return listArray.map(function(lists){
+            return <Text>{lists}</Text>
+    }
+
+    )
+  } 
+      
+    render() {
+           
+        return (                                   
+            <View style={Style.rootContainer}>
+                    <View style={Style.namePlate}>
+                            <Text style={{color:'white',fontSize: 20}} >VoiceCheckList</Text>
+                    </View>
+                    <View style={Style.displayContainer}>
+                        <TextInput
+                            style={{height: 100}}
+                            placeholder="Type here to list!"
+                            onChangeText={(userInput) => this.setState({userInput})}
+                         />   
+                         
+                    </View>
+                    <View style={Style.listcontainer}>
+                        <View style={Style.listBox}>
+                      
+                             <ScrollView style={{marginLeft: 10}}>
+
+                             {   <CheckBox>
+                                            label= {'lol'}
+                                            size={20}
+                                            checked={this.state.isChecked}
+                                            onPress={this.handlePressCheckedBox}
+                                           this.renderList()
+                                    </CheckBox>    }           
+                                  
+                             </ScrollView>
+                        </View>
+                    </View>
+            </View>
+        );
+    }  
+
+ }

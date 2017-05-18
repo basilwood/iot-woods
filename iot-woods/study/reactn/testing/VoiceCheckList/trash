@@ -1,0 +1,927 @@
+import React, { Component } from 'react';
+import { AppRegistry, ListView,TextInput, Text, View } from 'react-native';
+
+import Style from './styling';
+
+
+class VoiceCheckList extends Component {
+      constructor(props) {
+    super(props);
+ 
+ const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+    this.state = {userInput: ' '}, {
+      dataSource: ds.cloneWithRows(renderlist()),
+          };
+  }
+      
+      
+    render() {
+        return (
+            <View style={Style.rootContainer}>
+                    <View style={Style.namePlate}>
+                            <Text style={{color:'white',fontSize: 20}} >VoiceCheckList</Text>
+                    </View>
+                    <View style={Style.displayContainer}>
+                        <TextInput
+                            style={{height: 100}}
+                            placeholder="Type here to list!"
+                            onChangeText={(userInput) => this.setState({userInput})}
+                         />   
+                    </View>
+                    <View style={Style.listcontainer}>
+                        <View style={Style.listBox}>
+                             <ListView
+                                dataSource={this.state.dataSource}
+                                renderRow={(data) => <View><Text>{data}</Text></View>}
+                             />
+                        </View>
+                    </View>
+            </View>
+        );
+    }
+
+
+
+ renderlist(){
+    var list = this.state.userInput;
+    var listArray=[];
+    listArray = list.split(' ');
+    return listArray;
+    
+  
+    
+}
+ }
+}
+      
+AppRegistry.registerComponent('VoiceCheckList', () => VoiceCheckList);
+______________________________________________________________________________________________________________
+the code with not working comment box- nothing worked
+______________________________________________________________________________________________________________
+check box
+______________________________________________________________________________________________________________
+import React, { Component } from 'react';
+import Icon from  'react-native-vector-icons/MaterialIcons';
+
+class CheckBox extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      data: this.props.data
+    };
+  }
+
+  render() {
+    let iconName ='check-box-outline-blank';
+    let color = this.props.color || '#000';
+
+    return (
+      <Icon.Button
+        data={this.state.data}
+        name={iconName}
+        backgroundColor='rgba(0,0,0,0)'
+        color={color}
+        underlayColor='rgba(0,0,0,0)'
+        size={40}
+        iconStyle={{marginLeft: 10, marginRight: 0}}
+        activeOpacity={1}
+        borderRadius={5}
+        onPress={this.props.onCheckBoxPressed}
+      >
+      </Icon.Button>
+    );
+  }
+}
+
+module.exports = CheckBox;
+
+_________________________________
+https://hellokoding.com/todo-app-with-react-native/
+_________________________________
+
+______________________________________________________________________________________________________________
+onCheckBoxfield,CheckBox
+import React, { Component } from 'react';
+import { AppRegistry, ScrollView,TextInput,StyleSheet, Text, View } from 'react-native';
+
+import Style from './styling';
+import { CheckboxField, Checkbox } from 'react-native-checkbox-field';
+
+
+
+
+class VoiceCheckList extends Component {
+   
+state = {userInput: ''};
+state = {
+            selected: false,
+            fieldLabel: 'Field A'
+        };
+ 
+selectCheckbox = this.selectCheckbox.bind(this);
+
+selectCheckbox() {
+        this.setState({
+            selected: !this.state.selected
+        });
+    }
+ 
+
+  renderList(){
+    var list = this.state.userInput;
+    var listArray=[];
+    listArray = list.split(' ');
+   return listArray.map(function(lists){
+            return <Text>{lists}</Text>
+    }
+
+    )
+  } 
+      
+    render() {
+                const defaultColor = '#fff';
+
+        return (
+            <View style={Style.rootContainer}>
+                    <View style={Style.namePlate}>
+                            <Text style={{color:'white',fontSize: 20}} >VoiceCheckList</Text>
+                    </View>
+                    <View style={Style.displayContainer}>
+                        <TextInput
+                            style={{height: 100}}
+                            placeholder="Type here to list!"
+                            onChangeText={(userInput) => this.setState({userInput})}
+                         />   
+                         
+                    </View>
+                    <View style={Style.listcontainer}>
+                        <View style={Style.listBox}>
+                            
+                             <ScrollView style={{marginLeft: 10}}>
+                                          <CheckboxField
+                                                label={this.state.fieldLabel}
+                                                onSelect={this.selectCheckbox}
+                                                disabled={this.props.disabled}
+                                                disabledColor='rgb(236,236,236)'
+                                                selected={this.state.selected}
+                                                defaultColor= '#fff'
+                                                selectedColor="#247fd2"
+                                                containerStyle={styles.containerStyle}
+                                                labelStyle={styles.labelStyle}
+                                                checkboxStyle={styles.checkboxStyle}
+                                                labelSide="left">
+                                                <Text style={{ color: defaultColor }}>Y</Text>
+                                            </CheckboxField>      
+                                    {this.renderList()}
+                               
+                             </ScrollView>
+                        </View>
+                    </View>
+            </View>
+        );
+    }  
+
+ }
+const styles = StyleSheet.create({
+    containerStyle: {
+        flex: 1,
+        flexDirection: 'row',
+        padding: 20,
+        alignItems: 'center'
+    },
+    labelStyle: {
+        flex: 1
+    },
+    checkboxStyle: {
+        width: 26,
+        height: 26,
+        borderWidth: 2,
+        borderColor: '#ddd',
+        borderRadius: 5
+    }
+});
+      
+AppRegistry.registerComponent('VoiceCheckList', () => VoiceCheckList);
+
+______________________________________________________________________________________________________________
+with cmmentbox
+______________________________________________________________________________________________________________
+import React, { Component } from 'react';
+import { AppRegistry, ScrollView,TextInput, Text, View } from 'react-native';
+
+import Style from './styling';
+import CheckBox from 'react-native-icon-checkbox';
+
+class VoiceCheckList extends Component {
+   
+state = {userInput: '',
+      isChecked: false,
+    };
+  
+  handlePressCheckedBox = (checked) => {
+    this.setState({
+      isChecked: checked,
+    });
+  }
+
+  renderList(){
+    var list = this.state.userInput;
+    var listArray=[];
+    listArray = list.split(' ');
+   return listArray.map(function(lists){
+       <CheckBox>
+          label= {'lol'}
+           size={20}
+           checked={this.state.isChecked}
+           onPress={this.handlePressCheckedBox}
+          
+        </CheckBox> 
+            return <Text>{lists}</Text>
+    }
+
+    )
+  } 
+
+    render() {
+           
+        return (                                   
+            <View style={Style.rootContainer}>
+                    <View style={Style.namePlate}>
+                            <Text style={{color:'white',fontSize: 20}} >VoiceCheckList</Text>
+                    </View>
+                    <View style={Style.displayContainer}>
+                        <TextInput
+                            style={{height: 100}}
+                            placeholder="Type here to list!"
+                            onChangeText={(userInput) => this.setState({userInput})}
+                         />   
+                         
+                    </View>
+                    <View style={Style.listcontainer}>
+                        <View style={Style.listBox}>
+                                <ScrollView style={{marginLeft: 10}}>
+                                    {this.renderList()}      
+                                </ScrollView>
+                        </View>
+                    </View>
+            </View>
+        );
+    }  
+
+ }
+AppRegistry.registerComponent('VoiceCheckList', () => VoiceCheckList);
+______________________________________________________________________________________________________________
+trial with setState
+______________________________________________________________________________________________________________
+import React, { Component } from 'react';
+import { AppRegistry, ScrollView,TextInput, Text, View } from 'react-native';
+
+import Style from './styling';
+import CheckBox from 'react-native-icon-checkbox';
+
+class VoiceCheckList extends Component {
+   
+state = {userInput: '',
+      isChecked: false,
+      hello: 'fish'
+    };
+  
+  handlePressCheckedBox = (checked) => {
+    this.setState({
+      isChecked: checked,
+    });
+  }
+
+  renderList(){
+//     var list = this.state.userInput;
+//     var listArray=[];
+//     listArray = list.split(' ');
+//    return listArray.map(function(lists){
+//             console.log(lists);
+var char=['hello','hi'];
+for(let i = 0; i < char.length; i++){
+    this.setState({hello: 'man'});
+    return <Text> {this.state.hello} </Text>
+} 
+  }
+  
+
+    render() {
+
+        return (   
+              
+                                          
+            <View style={Style.rootContainer}>
+                    <View style={Style.namePlate}>
+                            <Text style={{color:'white',fontSize: 20}} >VoiceCheckList</Text>
+                    </View>
+                    <View style={Style.displayContainer}>
+                        {/*<TextInput
+                            style={{height: 100}}
+                            placeholder="Type here to list!"
+                            onChangeText={(userInput) => this.setState({userInput})}
+                         />   */}
+                         
+                    </View>
+                    
+                    <View style={Style.listcontainer}>
+                        
+                        <View style={Style.listBox}>
+                         
+          
+                               <ScrollView style={{marginLeft: 10}}>
+                                   
+
+                                 {/*<CheckBox
+                                        label= {this.state.hello}
+                                        size={20}
+                                        checked={this.state.isChecked}
+                                        onPress={this.handlePressCheckedBox}/> */}
+
+                                        {this.renderList()};
+                                </ScrollView>
+
+                      
+
+                        </View>
+                           
+                    </View>
+                    
+            </View>
+            
+        );
+
+    }  
+    
+ }
+ 
+AppRegistry.registerComponent('VoiceCheckList', () => VoiceCheckList);
+______________________________________________________________________________________________________________
+hopefully working
+______________________________________________________________________________________________________________
+import React, { Component } from 'react';
+import { AppRegistry, ScrollView,TextInput, Text, View } from 'react-native';
+
+import Style from './styling';
+import CheckBox from 'react-native-icon-checkbox';
+
+class VoiceCheckList extends Component {
+   
+state = {userInput: '',
+      isChecked: false,
+      hello: 'fish'
+    };
+  
+  handlePressCheckedBox = (checked) => {
+    this.setState({
+      isChecked: checked,
+    });
+  }
+
+  renderList(){
+        var list = this.state.userInput;
+        var listArray=[];
+        listArray = list.split(' ');
+        return listArray.map(function(lists){
+        return <Text>{lists}</Text>;
+
+} );
+  }
+  
+
+    render() {
+
+        return (   
+              
+                                          
+            <View style={Style.rootContainer}>
+                    <View style={Style.namePlate}>
+                            <Text style={{color:'white',fontSize: 20}} >VoiceCheckList</Text>
+                    </View>
+                    <View style={Style.displayContainer}>
+                        {/*<TextInput
+                            style={{height: 100}}
+                            placeholder="Type here to list!"
+                            onChangeText={(userInput) => this.setState({userInput})}
+                         />   */}
+                         
+                    </View>
+                    
+                    <View style={Style.listcontainer}>
+                        
+                        <View style={Style.listBox}>
+                         
+          
+                               <ScrollView style={{marginLeft: 10}}>
+                                   
+                                    <CheckBox
+                                        label= {this.renderList()}
+                                        size={20}
+                                        checked={this.state.isChecked}
+                                        onPress={this.handlePressCheckedBox}/> 
+
+                                        
+                                </ScrollView>
+
+                      
+
+                        </View>
+                           
+                    </View>
+                    
+            </View>
+            
+        );
+
+    }  
+    
+ }
+ 
+AppRegistry.registerComponent('VoiceCheckList', () => VoiceCheckList);
+______________________________________________________________________________________________________________
+emulator screen frozen
+______________________________________________________________________________________________________________
+import React, { Component } from 'react';
+import { AppRegistry, ScrollView,TextInput, Text, View } from 'react-native';
+
+import Style from './styling';
+import CheckBox from 'react-native-icon-checkbox';
+
+class VoiceCheckList extends Component {
+   
+state = {userInput: '',
+      isChecked: false,
+      hello: 'fish'
+    };
+  
+  handlePressCheckedBox = (checked) => {
+    this.setState({
+      isChecked: checked,
+    });
+  }
+
+  renderList(){
+//     var list = this.state.userInput;
+//     var listArray=[];
+//     listArray = list.split(' ');
+//    return listArray.map(function(lists){
+//             console.log(lists);
+// var char=['hello','hi'];
+// for(let i = 0; i < char.length; i++){
+    this.setState({hello: 'man'});
+    console.log( <Text> {this.state.hello} </Text>)
+} 
+  }
+  
+
+    render() {
+
+        return (   
+              
+                                          
+            <View style={Style.rootContainer}>
+                    <View style={Style.namePlate}>
+                            <Text style={{color:'white',fontSize: 20}} >VoiceCheckList</Text>
+                    </View>
+                    <View style={Style.displayContainer}>
+                        {/*<TextInput
+                            style={{height: 100}}
+                            placeholder="Type here to list!"
+                            onChangeText={(userInput) => this.setState({userInput})}
+                         />   */}
+                         
+                    </View>
+                    
+                    <View style={Style.listcontainer}>
+                        
+                        <View style={Style.listBox}>
+                         
+          
+                               <ScrollView style={{marginLeft: 10}}>
+                                   
+                                 {/*<CheckBox
+                                        label= {this.state.hello}
+                                        size={20}
+                                        checked={this.state.isChecked}
+                                        onPress={this.handlePressCheckedBox}/> */}
+
+                                        {this.renderList()};
+                                </ScrollView>
+
+                      
+
+                        </View>
+                           
+                    </View>
+                    
+            </View>
+            
+        );
+
+    }  
+    
+ }
+ 
+AppRegistry.registerComponent('VoiceCheckList', () => VoiceCheckList);
+______________________________________________________________________________________________________________
+import React, { Component } from 'react';
+import { AppRegistry, ScrollView,TextInput, Text, View } from 'react-native';
+
+import Style from './styling';
+import CheckBox from 'react-native-icon-checkbox';
+
+class VoiceCheckList extends Component {
+   
+state = {userInput: '',
+      isChecked: false,
+      //hello: 'fish'
+    };
+  
+  handlePressCheckedBox = (checked) => {
+    this.setState({
+      isChecked: checked,
+    });
+  }
+
+  renderList(){
+//     var list = this.state.userInput;
+//     var listArray=[];
+//     listArray = list.split(' ');
+//    return listArray.map(function(lists){
+//             console.log(lists);
+// var char=['hello','hi'];
+// for(let i = 0; i < char.length; i++){
+    //this.setState({hello: 'man'});
+    //console.log( 'hello');
+return<Text>hello</Text>
+} 
+  //}
+    render() {
+
+        return (   
+              
+                                          
+            <View style={Style.rootContainer}>
+                    <View style={Style.namePlate}>
+                            <Text style={{color:'white',fontSize: 20}} >VoiceCheckList</Text>
+                    </View>
+                    <View style={Style.displayContainer}>
+                        <TextInput
+                            style={{height: 100}}
+                            placeholder="Type here to list!"
+                            onChangeText={(userInput) => this.setState({userInput})}
+                         />  
+                         
+                    </View>
+                    
+                    <View style={Style.listcontainer}>
+                        
+                        <View style={Style.listBox}>
+                         
+          
+                               <ScrollView style={{marginLeft: 10}}>
+                                   
+                                 {/*<CheckBox
+                                        label= {this.state.hello}
+                                        size={20}
+                                        checked={this.state.isChecked}
+                                        onPress={this.handlePressCheckedBox}/> */}
+
+                                        {this.renderList()};
+
+                                </ScrollView>
+
+                        </View>
+                           
+                    </View>
+                    
+            </View>
+            
+        );
+
+    }  
+    
+ }
+ 
+AppRegistry.registerComponent('VoiceCheckList', () => VoiceCheckList);
+______________________________________________________________________________________________________________
+  renderList() {
+    var list = this.state.userInput;
+    var listArray = [];
+    listArray = list.split(' ');
+   return listArray.map(function (lists){
+//             console.log(lists);
+// var char=['hello','hi'];
+// for(let i = 0; i < char.length; i++){
+    //this.setState({hello: 'man'});
+    console.log('hello');
+        //return <Text>helloo</Text>;
+});
+  }
+
+    renderList() {
+    var listArray = ['egg' , 'cucumber' , 'milk' , 'rice' , 'wheat'];
+    listArray.map(function(grocery){
+          return <Text>{grocery}</Text>
+ } 
+);
+  }
+
+  ______________________________________________________________________________________________________________
+  working till the check box but can't select individually
+  ______________________________________________________________________________________________________________
+  import React, { Component } from 'react';
+import { AppRegistry, ScrollView, TextInput, Text, View } from 'react-native';
+
+import Style from './styling';
+import CheckBox from 'react-native-icon-checkbox';
+
+class VoiceCheckList extends Component {
+   
+state = {
+      isChecked: false,
+    };
+  
+  handlePressCheckedBox = (checked) => {
+    this.setState({
+      isChecked: checked,
+    });
+  }
+
+
+  renderList() {
+        const listArray = ['egg', 'cucumber', 'milk', 'rice', 'wheat'];
+        return listArray.map((lists) => {
+          console.log(lists);
+         return (<CheckBox
+                    label={lists}
+                    size={20}
+                    checked={this.state.isChecked}
+                    onPress={this.handlePressCheckedBox} 
+                  />);
+});
+  }
+  
+
+    render() {
+      return (
+                             
+            <View style={Style.rootContainer}>
+                    <View style={Style.namePlate}>
+                            <Text style={{ color: 'white', fontSize: 20 }} >VoiceCheckList</Text>
+                    </View>
+                    <View style={Style.displayContainer}>
+                        {/*<TextInput
+                            style={{height: 100}}
+                            placeholder="Type here to list!"
+                            onChangeText={(userInput) => this.setState({userInput})}
+                         />   */}
+                         
+                    </View>
+                    
+                    <View style={Style.listcontainer}>
+                        
+                        <View style={Style.listBox}>
+                         
+          
+                               <ScrollView style={{ marginLeft: 10 }}>
+                                
+                                    {this.renderList()}
+                                        
+                                </ScrollView>
+
+
+                        </View>
+                           
+                    </View>
+                    
+            </View>
+      );
+     } 
+
+    }  
+
+AppRegistry.registerComponent('VoiceCheckList', () => VoiceCheckList);
+______________________________________________________________________________________________________________
+working code by anna
+______________________________________________________________________________________________________________
+import React, { Component } from 'react';
+import { AppRegistry, ScrollView, TextInput, Text, View } from 'react-native';
+
+import Style from './styling';
+import CheckBox from 'react-native-icon-checkbox';
+
+class VoiceCheckList extends Component {
+
+  state = { vars:
+          [{ name: 'egg', checked: false },
+           { name: 'cucumber', checked: false },
+           { name: 'milk', checked: false },
+           { name: 'rice', checked: false },
+           { name: 'wheat', checked: false }
+          ] }; 
+
+  // handlePressCheckedBox = (pressed) => {
+  //   console.log(JSON.stringify(this));
+  //   this.checked = true;
+  //   //item.checked = !item.checked;
+  //   /*
+  //   this.setState({
+  //     isChecked: pressed,
+  //   });*/
+  // }
+
+  renderList() {
+    let onMypress = (item, pressed) => {
+      //console.log('Pressed ' + pressed);
+      //console.log('the item is ' + JSON.stringify(item));
+      item.checked = !item.checked;      
+     // console.log('Pressed ' + JSON.stringify(item));
+      this.setState(this.state);
+    };
+
+      this.state.vars.forEach((item) => {
+     // console.log('JSON object' + JSON.stringify(item));
+      debugger;
+      item.press = onMypress.bind(null, item);
+      console.log(item.press);
+      debugger;
+    });
+
+    return this.state.vars.map((lists) => 
+     // console.log(lists);
+     
+       lists);
+       ;
+  }
+
+  render() {
+    return (
+
+      <View style={Style.rootContainer}>
+        <View style={Style.namePlate}>
+          <Text style={{ color: 'white', fontSize: 20 }} >VoiceCheckList</Text>
+        </View>
+        <View style={Style.displayContainer}>
+         {/*<TextInput
+                            style={{height: 100}}
+                            placeholder="Type here to list!"
+                            onChangeText={(userInput) => this.setState({userInput})}
+                         />   */}
+
+        </View>
+        <View style={Style.listcontainer}>
+          <View style={Style.listBox}>
+            <ScrollView style={{ marginLeft: 10 }}>
+              {
+                this.renderList().map((child) =>
+                  (<CheckBox
+                    label={child.name}
+                    size={20}
+                    checked={child.checked}
+                    onPress={child.press}
+                  />)
+                )
+              }
+            </ScrollView>
+          </View>
+        </View>
+      </View>
+    );
+  }
+
+}
+
+AppRegistry.registerComponent('VoiceCheckList', () => VoiceCheckList);
+______________________________________________________________________________________________________________
+working code- checkbox and 'next' working
+______________________________________________________________________________________________________________
+import React, { Component } from 'react';
+import { AppRegistry, ScrollView, TextInput, Text, View } from 'react-native';
+
+import Style from './styling';
+import CheckBox from 'react-native-icon-checkbox';
+
+class VoiceCheckList extends Component {
+
+  state = {
+    vars:[]
+  };
+
+  // handlePressCheckedBox = (pressed) => {
+  //   console.log(JSON.stringify(this));
+  //   this.checked = true;
+  //   //item.checked = !item.checked;
+  //   /*
+  //   this.setState({
+  //     isChecked: pressed,
+  //   });*/
+  // }
+
+  clearText() {
+    this._textInput.setNativeProps({text: ''});
+  }
+
+ getInput(userInput) {
+   
+   var str = userInput;
+   var splitter = "next";
+   if (str.indexOf(splitter, str.length - splitter.length) !== -1) {
+     str = str.substring(0, str.length - splitter.length);
+     var item = { name: str, checked: false };
+     this.state.vars.push(item);
+     this.setState(this.state); 
+     this.clearText();
+   }
+   console.log(userInput);
+   //const stateArray = [];
+   
+    //if (userInput === 'kkk') {
+      //console.log('enter is pressed');
+       // stateArray.push(userInput);
+  // }
+        //stateArray.map((elemets) =>
+          
+
+     //);
+}
+
+ //handleSubmit(event) {
+   
+   //let itemName = event.nativeEvent.text;
+   //console.log(JSON.stringify(event.nativeEvent));
+
+    //let item = { name: event.nativeEvent.text };
+    /*this.setState({
+                  vars:
+                  [{ name: itemName, checked: false },
+                  ]
+                }
+                ); */
+    //var items = this.state.items;
+    //this.setState({ vars:
+                  // [{ item, checked: false },
+                  // ] });
+    //console.log(this.state.vars);
+  //}
+
+
+  renderList() {
+    const onMypress = (item, pressed) => {
+      //console.log('Pressed ' + pressed);
+      //console.log('the item is ' + JSON.stringify(item));
+      item.checked = !item.checked;
+      // console.log('Pressed ' + JSON.stringify(item));
+      this.setState(this.state);
+    };
+    this.state.vars.forEach((item) => {
+      // console.log('JSON object' + JSON.stringify(item));
+      item.press = onMypress.bind(null, item); //wrapping onMypress and item in to press
+      //console.log(item.press);
+    });
+    return this.state.vars.map((lists) =>
+      // console.log(lists);
+      lists);
+  }
+  
+  render() {
+    return (
+
+      <View style={Style.rootContainer}>
+        <View style={Style.namePlate}>
+          <Text style={{ color: 'white', fontSize: 20 }} >VoiceCheckList</Text>
+        </View>
+        <View style={Style.displayContainer}>
+          <TextInput
+            ref={component => this._textInput = component}
+            style={{ height: 100 }}
+            placeholder="Type here to list!"
+            onChangeText={(userInput) => this.getInput(userInput)}
+            //onSubmitEditing={() => console.log('pressed onsubmiteditting')}
+            //onSubmitEditing={this.handleSubmit}
+          />
+
+        </View>
+        <View style={Style.listcontainer}>
+          <View style={Style.listBox}>
+            <ScrollView style={{ marginLeft: 10 }}>
+              {
+                this.renderList().map((child) =>
+                  (<CheckBox
+                    label={child.name}
+                    size={20}
+                    checked={child.checked}
+                    onPress={child.press}
+                  />)
+                )
+              }
+            </ScrollView>
+          </View>
+        </View>
+      </View>
+    );
+  }
+
+}
+
+AppRegistry.registerComponent('VoiceCheckList', () => VoiceCheckList);
