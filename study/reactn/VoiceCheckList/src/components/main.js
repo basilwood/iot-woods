@@ -21,7 +21,7 @@ import Button from './button';
 import Button2 from './undo-button';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-var alertMessage = 'Delete item?';
+let alertMessage = 'Delete item?';
 
 const speechProcessor = require('./speech-processor');
 
@@ -111,6 +111,8 @@ class MainPage extends Component {
         return null;
       }
     }
+    myFunction() {
+    }
 
     handleTextInputFromSpeechRecognizer(userInput) {
       if (userInput === 'error7') {
@@ -120,9 +122,13 @@ class MainPage extends Component {
         } else {
           //console.log(`this.state is true ${  this.state.speaking}`);
           this.setIconToMic();
+          console.log(this.state.image);
           this.saveDataToDisk();
           this.state.speaking = true;
-          this.handleSpeechInput();
+          
+          
+          setTimeout(() => { this.myFunction;}, 30000);   
+          this.handleSpeechInput();  
           //ToastAndroid.show('Listening is ended', ToastAndroid.SHORT);
         }
       } else if (userInput === 'onEndofSpeech') {
@@ -174,30 +180,36 @@ class MainPage extends Component {
         this.handleSpeechInput();
         this.saveDataToDisk();
       } else if ((userInput.indexOf('next', userInput.length - userInput.length)) === -1) {
-        if (this.state.input === ''){
+        if (this.state.input === '') {
         const newInput = `${userInput}next`;
+        this.setIconToMic();
         this.handleTextInput(newInput);
+        this.handleSpeechInput();
         } else {
         const newInput = `${userInput}next`;
         const stateInput = `${this.state.input} ${newInput}`;
+        this.setIconToMic();
         this.handleTextInput(stateInput);
         this.inputStateToNull();
-        this.handleSpeechInput();
         this.saveDataToDisk();
+        this.handleSpeechInput();
         }
       } else {
         //if this.state.input is !=='', add a space after it. 
         //if not try other
-        console.log('state '+ this.state.input);
+        console.log(`state ${ this.state.input}`);
         if (this.state.input === '') {
         const Input = userInput;
         console.log(Input);
         this.inputStateToNull();
+        this.setIconToMic();
         this.handleTextInput(Input);
+        this.handleSpeechInput();
       } else {
         const Input = `${this.state.input} ${userInput}`;
         console.log(Input);
         this.inputStateToNull();
+        this.setIconToMic();
         this.handleTextInput(Input);
         this.inputStateToNull();
         this.saveDataToDisk();
