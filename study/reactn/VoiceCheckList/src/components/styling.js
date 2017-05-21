@@ -36,7 +36,7 @@ const Style = {
         backgroundColor: '#F6F6F6',
         borderWidth: 1,
         borderColor: 'black',
-        borderBottomColor: 'red',
+        borderBottomColor: 'black',
         alignItems: 'stretch'
 
     },

@@ -11,7 +11,7 @@ import {
   ToastAndroid,
   StatusBar,
   Alert,
-  NativeModules
+  NativeModules,
 } from 'react-native';
 
 import CheckBox from 'react-native-icon-checkbox';
@@ -21,7 +21,7 @@ import Button from './button';
 import Button2 from './undo-button';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-let alertMessage = 'Delete item?';
+const alertMessage = 'Delete item?';
 
 const speechProcessor = require('./speech-processor');
 
@@ -101,7 +101,7 @@ class MainPage extends Component {
             //console.log(`id before ${this.state.id}`);
             const settingState = processingFunction(dataString, this, this.state);
             this.state.id = settingState;
-            //console.log(`id after ${this.state.id}`);
+            console.log(`id after ${this.state.id}`);
             //console.log('processing function is executed');
             //console.log(this.state);
             this.state.input = '';
@@ -125,9 +125,7 @@ class MainPage extends Component {
           console.log(this.state.image);
           this.saveDataToDisk();
           this.state.speaking = true;
-          
-          
-          setTimeout(() => { this.myFunction;}, 30000);   
+          setTimeout(() => { this.myFunction; }, 30000);   
           this.handleSpeechInput();  
           //ToastAndroid.show('Listening is ended', ToastAndroid.SHORT);
         }
@@ -197,7 +195,7 @@ class MainPage extends Component {
       } else {
         //if this.state.input is !=='', add a space after it. 
         //if not try other
-        console.log(`state ${ this.state.input}`);
+        console.log(`state ${this.state.input}`);
         if (this.state.input === '') {
         const Input = userInput;
         console.log(Input);
@@ -385,7 +383,7 @@ class MainPage extends Component {
             <TextInput
               ref='textBox'
               style={{ height: 100 }}
-              placeholder="Touch the mic icon and speak or touch for keyboard"
+              placeholder="Touch the mic icon to speak or use the keyboard"
               onChangeText={(userInput) => this.handleTextInput(userInput)}
               returnKeyType={'done'}
               onSubmitEditing={() => this.onEnterKeyPress('textBox')}
@@ -395,11 +393,17 @@ class MainPage extends Component {
           </View>
           <View style={Style.listcontainer}>
             <View style={{ flexDirection: 'row', flex: 1 }} >
-              <ScrollView ref="scrollView" style={{ paddingLeft: 15, alignSelf: 'stretch' }} onContentSizeChange={(width, height) => this.refs.scrollView.scrollTo({ y: height })}>
+              <ScrollView ref="scrollView" style={{ alignSelf: 'stretch' }} onContentSizeChange={(width, height) => this.refs.scrollView.scrollTo({ y: height })}>
                 {
                   this.renderList().map((child) =>
                     (
-                      <View key={child.name + Math.random()} style={{ flexDirection: 'row' }}>
+                      <View
+                        key={child.name + Math.random()} 
+                        style={{ marginLeft: 15, 
+                          flexDirection: 'row', 
+                          borderColor: '#a9a9a9', 
+                          borderBottomWidth: 0.25 }}
+                      >
                         <View style={{ flex: 9.25 }}>
                           <CheckBox
                             key={child.name + Math.random()}
