@@ -110,10 +110,10 @@ class MainPage extends Component {
         return null;
       }
     }
-    myFunction() {
-    }
 
     handleTextInputFromSpeechRecognizer(userInput) {
+if (this.state.speaking === false){
+} else {
       if (userInput === 'error7') {
         if (this.state.speaking === false) {
           //console.log(this.state.speaking);
@@ -124,7 +124,6 @@ class MainPage extends Component {
           console.log(this.state.image);
           this.saveDataToDisk();
           this.state.speaking = true;
-          setTimeout(() => { this.myFunction; }, 30000);   
           this.handleSpeechInput();  
           //ToastAndroid.show('Listening is ended', ToastAndroid.SHORT);
         }
@@ -213,6 +212,7 @@ class MainPage extends Component {
         this.handleSpeechInput();
       }
       }
+    }
     }
 
     async handleSpeechInput() {

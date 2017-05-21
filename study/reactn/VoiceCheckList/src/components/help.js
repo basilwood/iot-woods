@@ -91,7 +91,7 @@ export default class HelpWindow extends Component {
             <View style={Style.aboutContainer}>
               <Text />
               <Text style={{ fontSize: 25, fontWeight: 'bold', color: 'black', textAlign: 'center' }}> Speak-a-List for Android	</Text>
-              <Text style={{ color: 'black', fontSize: 10, textAlign: 'center' }}> Version 1.0</Text>
+              <Text style={{ color: 'black', fontSize: 10, textAlign: 'center' }}> Version 0.2</Text>
               <Text />
               <Text />
               <Text style={{ color: 'black', fontSize: 10, textAlign: 'center' }}> Contact us: ajuvignesh@gmail.com</Text>
