@@ -61,7 +61,6 @@ class MainPage extends Component {
 
    setIconToCircle() {
         this.state.image = require('../images/micanim.gif');
-        //console.log('set to circle');
         this.state.icontouchDisabled = true;
         this.setState(this.state);
         KeepAwake.activate();
